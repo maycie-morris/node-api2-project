@@ -54,15 +54,18 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+    const { id } = req.params
     const changes = req.body;
+    const found = Posts.find(p => p.id === id)
     
-    Posts.update(req.params.id, changes)
+    Posts.update(id, changes)
         .then(post => {
-            if (!post.title || !post.contents) {
+            if (!changes.title || !changes.contents) {
                 res.status(400).json({
                     errorMessage: 'Please provide title and contents for the post.'
                 })
             } else if (post) {
+                Object.assign(found, changes)
                 res.status(200).json(post)
             } else {
                 res.status(404).json({
