@@ -1,6 +1,7 @@
 const express = require('express');
 
 const postsRouter = require('./posts/posts-router')
+// const commentsRouter = require('./comments/comments-router')
 
 const server = express();
 
@@ -15,6 +16,7 @@ server.get('/', (req, res) => {
 });
 
 server.use('/api/posts', postsRouter)
+// server.use('/api/comments', commentsRouter)
 
 server.listen(4000, () => {
     console.log('Server is running')
