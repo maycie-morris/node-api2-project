@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
 router.get('/:id/comments', (req, res) => {
     Posts.findPostComments(req.params.id)
         .then(post => {
-        if (post.length) {
+        if (post) {
             res.status(200).json({ data: post })
         } else {
             res.status(404).json({
@@ -138,7 +138,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     Posts.remove(req.params.id)
         .then(post => {
-            if (counter > 0) {
+            if (post) {
                 res.status(200).json({
                     message: 'The post has been deleted.'
                 })
